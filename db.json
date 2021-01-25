@@ -1,0 +1,33 @@
+{
+    "bg": "https://cdn.hipwallpaper.com/i/85/54/a698ig.jpg",
+    "title": "Título do Quiz",
+    "description": "Descrição do seu quiz aqui",
+    "questions": [
+      {
+        "image": "",
+        "title": "",
+        "description": "",
+        "answer": 2,
+        "alternatives": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      }
+    ],
+    "external": [
+      ""
+    ],
+    "theme": {
+      "colors": {
+        "primary": "#CC0C1D",
+        "secondary": "#FED217",
+        "mainBg": "#DD2115",
+        "contrastText": "#FFF",
+        "wrong": "#FED217",
+        "success": "#94C221"
+      },
+      "borderRadius": "4px"
+    }
+  }
