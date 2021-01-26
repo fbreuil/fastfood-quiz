@@ -1,8 +1,9 @@
-import styled from 'styled-components'
-
 // src/components/Footer/index.js
+import React from 'react';
+import styled from 'styled-components';
+
 const FooterWrapper = styled.footer`
-  background-color: #FED217;
+  background-color: ${({ theme }) => theme.colors.secondary};
   padding: 20px;
   display: flex;
   align-items: center;

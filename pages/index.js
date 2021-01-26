@@ -1,9 +1,16 @@
-import styled from 'styled-components'
-import db from '../db.json'
-import Widget from '../src/components/Widget'
-import Footer from '../src/components/Footer'
-import GitHubCorner from '../src/components/GitHubCorner'
-import QuizBackground from '../src/components/QuizBackground'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+
+import db from '../db.json';
+import Logo from '../src/components/QuizLogo';
+import Widget from '../src/components/Widget';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
+import Footer from '../src/components/Footer';
+import GitHubCorner from '../src/components/GitHubCorner';
+import QuizBackground from '../src/components/QuizBackground';
 
 const QuizContainer = styled.div`
   width: 100%;
@@ -17,16 +24,38 @@ const QuizContainer = styled.div`
 `;
 
 export default function Home() {
-  return (
+  const router = useRouter();
+  const [name, setName] = useState('');
 
-    <QuizBackground backgroundImage ={db.bg}>
+  const getValueName = (e) => {
+    setName(e.target.value);
+  };
+
+  const startGame = (e) => {
+    e.preventDefault();
+    router.push(`/quiz?name=${name}`);
+  };
+
+  return (
+    <QuizBackground backgroundImage={db.bg}>
+      <Head>
+        <title>Fast Foods Quiz</title>
+      </Head>
       <QuizContainer>
+        <Logo />
         <Widget>
           <Widget.Header>
-              <h1>Junk Foods</h1>
+            <h1>Fast Foods</h1>
           </Widget.Header>
           <Widget.Content>
-            <p>lorem ipsum dolor sit amet</p>
+            <p>Teste os seus conhecimentos sobre fast foods e divirta-se criando o seu AluraQuiz</p>
+            <form onSubmit={startGame}>
+              <Input
+                onChange={getValueName}
+                placeholder="Diz aí seu nome :)"
+              />
+              <Button type="submit" disabled={name.length === 0}>Jogar</Button>
+            </form>
           </Widget.Content>
         </Widget>
         <Widget>
@@ -37,9 +66,7 @@ export default function Home() {
         </Widget>
         <Footer />
       </QuizContainer>
-      <GitHubCorner projectUrl="https://github.com/fbreuil" />
+      <GitHubCorner projectUrl="https://github.com/fbreuil/fastfood-quiz" />
     </QuizBackground>
-    
-  )
-    
+  );
 }
