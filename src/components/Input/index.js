@@ -1,6 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Input = styled.input`
+const InputBase = styled.input`
   background: ${({ theme }) => theme.colors.mainBg};
   color: white;
   display: block;
@@ -19,4 +21,28 @@ const Input = styled.input`
 
 `;
 
-export default Input;
+export default function Input({
+  onChange, placeholder, name, value,
+}) {
+  return (
+    <div>
+      <InputBase
+        onChange={onChange}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+      />
+    </div>
+  );
+}
+
+Input.defaultProps = {
+  value: '',
+};
+
+Input.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+};

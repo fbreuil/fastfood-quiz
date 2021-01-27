@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
 import db from '../db.json';
+
 import Logo from '../src/components/QuizLogo';
 import Widget from '../src/components/Widget';
 import Input from '../src/components/Input';
@@ -11,25 +10,11 @@ import Button from '../src/components/Button';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 import QuizBackground from '../src/components/QuizBackground';
-
-const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
-  @media screen and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
+import QuizContainer from '../src/components/QuizContainer';
 
 export default function Home() {
   const router = useRouter();
   const [name, setName] = useState('');
-
-  const getValueName = (e) => {
-    setName(e.target.value);
-  };
 
   const startGame = (e) => {
     e.preventDefault();
@@ -51,8 +36,10 @@ export default function Home() {
             <p>Teste os seus conhecimentos sobre fast foods e divirta-se criando o seu AluraQuiz</p>
             <form onSubmit={startGame}>
               <Input
-                onChange={getValueName}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Diz aí seu nome :)"
+                name="nomeDoUsuario"
+                value={name}
               />
               <Button type="submit" disabled={name.length === 0}>Jogar</Button>
             </form>

@@ -1,18 +1,30 @@
 {
     "bg": "https://cdn.hipwallpaper.com/i/85/54/a698ig.jpg",
-    "title": "Título do Quiz",
+    "title": "Fast Foods",
     "description": "Descrição do seu quiz aqui",
     "questions": [
       {
-        "image": "",
-        "title": "",
-        "description": "",
-        "answer": 2,
+        "image": "https://www.topmelhores.com.br/imagens/post/194/fastfoods.png",
+        "title": "Qual é o maior sistema de franquias de fastfood do mundo?",
+        "description": "As redes de fast-food fazem parte de algo que veio realmente para ficar na vida das pessoas e todas buscam ser a maior do mundo.",
+        "answer": 1,
         "alternatives": [
-          "",
-          "",
-          "",
-          ""
+          "Starbucks",
+          "Subway",
+          "McDonald's",
+          "Burguer King"
+        ]
+      },
+      {
+        "image": "https://jornaldafranca.com.br/storage/app/media/0.0.FER/00.00FLR/mcdonalds-750x450.jpg",
+        "title": "Em qual estado foi inaugurado o primeiro McDonald's no Brasil?",
+        "description": "É impossível pensar fastfood sem lembrar da franquia McDonald's. No Brasil, instalou-se primeiramente em 13 de fevereiro de 1979.",
+        "answer": 0,
+        "alternatives": [
+           "Rio de Janeiro",
+           "Rio Grande do Sul",
+           "São Paulo",
+           "Bahia"
         ]
       }
     ],
