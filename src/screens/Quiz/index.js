@@ -1,18 +1,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import db from '../db.json';
+import { Lottie } from '@crello/react-lottie';
+// import db from '../../../db.json';
+import Widget from '../../components/Widget';
+import QuizLogo from '../../components/QuizLogo';
+import QuizBackground from '../../components/QuizBackground';
+import QuizContainer from '../../components/QuizContainer';
+import AlternativesForm from '../../components/AlternativesForm';
+import Button from '../../components/Button';
+import BackLinkArrow from '../../components/BackLinkArrow';
 
-import Widget from '../src/components/Widget';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizContainer from '../src/components/QuizContainer';
-import AlternativesForm from '../src/components/AlternativesForm';
-import Button from '../src/components/Button';
+import loadingAnimation from './animations/loading.json';
 
 function ResultWidget({ results }) {
   return (
     <Widget>
       <Widget.Header>
-        Tela de Resultado
+        Tela de Resultado:
       </Widget.Header>
 
       <Widget.Content>
@@ -24,22 +28,22 @@ function ResultWidget({ results }) {
             if (isAcerto) {
               return somatoriaAtual + 1;
             }
-
             return somatoriaAtual;
           }, 0)} */}
-          {results.filter((result) => result === true).length}
+          {results.filter((x) => x).length}
           {' '}
           perguntas
         </p>
         <ul>
           {results.map((result, index) => (
-            <li key={result}>
+            <li key={`result__${index}`}>
               #
               {index + 1}
               {' '}
               Resultado:
-              {' '}
-              {result === true ? 'Acertou' : 'Errou'}
+              {result === true
+                ? 'Acertou'
+                : 'Errou'}
             </li>
           ))}
         </ul>
@@ -48,7 +52,6 @@ function ResultWidget({ results }) {
   );
 }
 
-
 function LoadingWidget() {
   return (
     <Widget>
@@ -56,8 +59,13 @@ function LoadingWidget() {
         Carregando...
       </Widget.Header>
 
-      <Widget.Content>
-        [Desafio do Loading]
+      <Widget.Content style={{ display: 'flex', justifyContent: 'center' }}>
+        <Lottie
+          width="200px"
+          height="200px"
+          className="lottie-container basic"
+          config={{ animationData: loadingAnimation, loop: true, autoplay: true }}
+        />
       </Widget.Content>
     </Widget>
   );
@@ -65,13 +73,13 @@ function LoadingWidget() {
 
 function QuestionWidget({
   question,
-  totalQuestions,
   questionIndex,
+  totalQuestions,
   onSubmit,
   addResult,
 }) {
-  const [selectedAlternative, setSelectedAlternative] = React.useState();
-  const [isQuestionSubmited, setIsQuestionSubmited] = React.useState();
+  const [selectedAlternative, setSelectedAlternative] = React.useState(undefined);
+  const [isQuestionSubmited, setIsQuestionSubmited] = React.useState(false);
   const questionId = `question__${questionIndex}`;
   const isCorrect = selectedAlternative === question.answer;
   const hasAlternativeSelected = selectedAlternative !== undefined;
@@ -79,10 +87,12 @@ function QuestionWidget({
   return (
     <Widget>
       <Widget.Header>
+        <BackLinkArrow href="/" />
         <h3>
           {`Pergunta ${questionIndex + 1} de ${totalQuestions}`}
         </h3>
       </Widget.Header>
+
       <img
         alt="Descrição"
         style={{
@@ -93,18 +103,22 @@ function QuestionWidget({
         src={question.image}
       />
       <Widget.Content>
-        <h2>{question.title}</h2>
-        <p>{question.description}</p>
+        <h2>
+          {question.title}
+        </h2>
+        <p>
+          {question.description}
+        </p>
 
         <AlternativesForm
-          onSubmit={(e) => {
-            e.preventDefault();
+          onSubmit={(infosDoEvento) => {
+            infosDoEvento.preventDefault();
             setIsQuestionSubmited(true);
             setTimeout(() => {
               addResult(isCorrect);
+              onSubmit();
               setIsQuestionSubmited(false);
               setSelectedAlternative(undefined);
-              onSubmit();
             }, 3 * 1000);
           }}
         >
@@ -131,8 +145,13 @@ function QuestionWidget({
               </Widget.Topic>
             );
           })}
-          <Button type="submit" disabled={!hasAlternativeSelected}>Confirmar</Button>
 
+          {/* <pre>
+            {JSON.stringify(question, null, 4)}
+          </pre> */}
+          <Button type="submit" disabled={!hasAlternativeSelected}>
+            Confirmar
+          </Button>
           {isQuestionSubmited && isCorrect && <p>Você acertou!</p>}
           {isQuestionSubmited && !isCorrect && <p>Você errou!</p>}
         </AlternativesForm>
@@ -142,45 +161,53 @@ function QuestionWidget({
 }
 
 const screenStates = {
-  quiz: 'QUIZ',
-  loading: 'LOADING',
-  result: 'RESULT',
+  QUIZ: 'QUIZ',
+  LOADING: 'LOADING',
+  RESULT: 'RESULT',
 };
-
-export default function QuizPage() {
-  const [screenState, setScreenState] = React.useState(screenStates.loading);
+export default function QuizPage({ externalQuestions, externalBg }) {
+  const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const [results, setResults] = React.useState([]);
-  const totalQuestions = db.questions.length;
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
-  const question = db.questions[questionIndex];
+  const question = externalQuestions[questionIndex];
+  const totalQuestions = externalQuestions.length;
+  const bg = externalBg;
 
   function addResult(result) {
+    // results.push(result);
     setResults([
       ...results,
       result,
     ]);
   }
 
+  // [React chama de: Efeitos || Effects]
+  // React.useEffect
+  // atualizado === willUpdate
+  // morre === willUnmount
   React.useEffect(() => {
+    // fetch() ...
     setTimeout(() => {
-      setScreenState(screenStates.quiz);
-    }, 1 * 1000);
+      setScreenState(screenStates.QUIZ);
+    }, 1 * 2000);
+  // nasce === didMount
   }, []);
 
   function handleSubmitQuiz() {
     const nextQuestion = questionIndex + 1;
     if (nextQuestion < totalQuestions) {
-      setCurrentQuestion(questionIndex + 1);
+      setCurrentQuestion(nextQuestion);
     } else {
-      setScreenState(screenStates.result);
+      setScreenState(screenStates.RESULT);
     }
   }
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <QuizBackground backgroundImage={bg}>
       <QuizContainer>
-        {screenState === screenStates.quiz && (
+        <QuizLogo />
+        {screenState === screenStates.QUIZ && (
           <QuestionWidget
             question={question}
             questionIndex={questionIndex}
@@ -190,9 +217,9 @@ export default function QuizPage() {
           />
         )}
 
-        {screenState === screenStates.loading && <LoadingWidget />}
+        {screenState === screenStates.LOADING && <LoadingWidget />}
 
-        {screenState === screenStates.result && <ResultWidget results={results} />}
+        {screenState === screenStates.RESULT && <ResultWidget results={results} />}
       </QuizContainer>
     </QuizBackground>
   );
