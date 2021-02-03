@@ -5,9 +5,11 @@
     "questions": [
       {
         "image": "https://www.topmelhores.com.br/imagens/post/194/fastfoods.png",
+        "imageQuestionSubmited": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-subway-sub-1521220946.jpg",
         "title": "Qual é o maior sistema de franquias de fastfood do mundo?",
         "description": "As redes de fast-food fazem parte de algo que veio realmente para ficar na vida das pessoas e todas buscam ser a maior do mundo.",
         "answer": 1,
+        "answerDescription": "Subway se tornou o maior sistema de franquias de fast food do mundo. São mais de 42 mil unidades franqueadas, espalhadas em 110 países.",
         "alternatives": [
           "Starbucks",
           "Subway",
@@ -17,14 +19,30 @@
       },
       {
         "image": "https://jornaldafranca.com.br/storage/app/media/0.0.FER/00.00FLR/mcdonalds-750x450.jpg",
+        "imageQuestionSubmited": "https://tvhortolandia.com/wp-content/uploads/2019/09/ad-1.jpg",
         "title": "Em qual estado foi inaugurado o primeiro McDonald's no Brasil?",
         "description": "É impossível pensar fastfood sem lembrar da franquia McDonald's. No Brasil, instalou-se primeiramente em 13 de fevereiro de 1979.",
         "answer": 0,
+        "answerDescription": "O primeiro restaurante foi inaugurado no bairro de Copacabana, na zona sul do Rio de Janeiro, em 1979.",
         "alternatives": [
            "Rio de Janeiro",
            "Rio Grande do Sul",
            "São Paulo",
            "Bahia"
+        ]
+      },
+      {
+        "image": "http://www.paraibanoticia.net.br/wp-content/uploads/2019/09/FASTFOOD.jpg",
+        "imageQuestionSubmited": "https://neofeed.com.br/wp-content/uploads/2020/07/pizza-hut-2.jpg",
+        "title": "Qual dessas franquias não é brasileira?",
+        "description": "De acordo com especialistas, o fast-food nasceu no Reino Unido nos anos 1860 e se popularizou nos Estados Unidos na década de 1950. O fast-food no Brasil foi introduzido pelo ex-tenista Robert Falkenburg, em 1952.",
+        "answer": 3,
+        "answerDescription": "A Pizza Hut foi fundada em junho de 1958 por dois estudantes da Universidade Estadual de Wichita, os irmãos Dan e Frank Carney, em Wichita, Kansas, Estados Unidos.",
+        "alternatives": [
+           "Bob's",
+           "Habbib's",
+           "Spoleto",
+           "Pizza Hut"
         ]
       }
     ],
@@ -37,8 +55,8 @@
         "secondary": "#FED217",
         "mainBg": "#DD2115",
         "contrastText": "#FFF",
-        "wrong": "#FED217",
-        "success": "#94C221"
+        "wrong": "#E8302C",
+        "success": "#94C021"
       },
       "borderRadius": "4px"
     }

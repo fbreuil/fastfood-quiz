@@ -12,12 +12,13 @@ const Widget = styled.div`
     font-size: 16px;
     font-weight: 700;
     line-height: 1;
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
   p {
     font-size: 14px;
     font-weight: 400;
     line-height: 1;
+    margin: 0 0 20px 0;
   }
 `;
 
@@ -51,7 +52,7 @@ Widget.Topic = styled.a`
   outline: 0;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.contrastText};
-  background-color: ${({ theme }) => `${theme.colors.primary}40`};
+  background-color: ${({ theme }) => `${theme.colors.secondary}10`};
   padding: 10px 15px;
   margin-bottom: 8px;
   cursor: pointer;
@@ -61,7 +62,7 @@ Widget.Topic = styled.a`
   
   &:hover,
   &:focus {
-    opacity: .5;
+    opacity: .8;
   }
 `;
 

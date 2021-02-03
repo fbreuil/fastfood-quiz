@@ -5,7 +5,7 @@ const Button = styled.button`
   width: 100%;
   color: white;
   border: none;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: #CC0C1D;
   box-sizing: border-box;
   cursor: pointer;
   padding: 10px 20px;
@@ -20,7 +20,7 @@ const Button = styled.button`
 
   &:not([disabled]):hover,
   &:not([disabled]):focus {
-      background-color: #FAB235;
+      opacity: .8;
   }
 
   &[disabled] {

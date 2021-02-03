@@ -100,14 +100,14 @@ function QuestionWidget({
           height: '150px',
           objectFit: 'cover',
         }}
-        src={question.image}
+        src={isQuestionSubmited ? question.imageQuestionSubmited : question.image}
       />
       <Widget.Content>
         <h2>
-          {question.title}
+          {isQuestionSubmited ? '' : question.title}
         </h2>
         <p>
-          {question.description}
+          {isQuestionSubmited ? question.answerDescription : question.description}
         </p>
 
         <AlternativesForm
@@ -152,8 +152,6 @@ function QuestionWidget({
           <Button type="submit" disabled={!hasAlternativeSelected}>
             Confirmar
           </Button>
-          {isQuestionSubmited && isCorrect && <p>Você acertou!</p>}
-          {isQuestionSubmited && !isCorrect && <p>Você errou!</p>}
         </AlternativesForm>
       </Widget.Content>
     </Widget>
